@@ -1,0 +1,123 @@
+---
+title: 테스트 페이지
+date: Feb, 01, 2025
+description: MDX 기능을 테스트하기 위한 페이지입니다.
+category: git
+tags: [english, git]
+---
+
+# How to use Carousel in Next.js with Tailwind CSS
+
+---
+
+## What is Carousel?
+
+Carousel is a slideshow component that allows you
+to display multiple items in a single view.
+It is commonly used to showcase images, videos,
+or other content in a visually appealing way.
+You can adjust its speed, transition effect,
+and other settings to create a custom carousel
+that fits your needs.
+
+## Embla Carousel
+
+Embla Carousel is a lightweight, customizable carousel
+library for React. It provides various carousels with plugins like
+looping, autoplay, and touch support.
+
+## Install Carousel
+
+In your Next.js project(you must use Tailwind CSS to apply), open Termainal and run the following shall command
+
+```bash
+npm install embla-carousel --save
+```
+
+Then, import the carousel component in your React component
+
+```typescript
+import Image from 'next/image';
+import useEmblaCarousel from 'embla-carousel-react';
+export default function Carousel() {
+  const [emblaRef] = useEmblaCarousel({ loop: true, align: 'start' });
+
+  const images = [
+    'https://res.cloudinary.com/demo/image/upload/v1652345767/docs/demo_image2.jpg',
+    'https://res.cloudinary.com/demo/image/upload/v1652366604/docs/demo_image5.jpg',
+    'https://res.cloudinary.com/demo/image/upload/v1652345874/docs/demo_image1.jpg',
+    'https://res.cloudinary.com/demo/image/upload/v1652345767/docs/demo_image3.jpg',
+    'https://res.cloudinary.com/demo/image/upload/v1652345767/docs/demo_image2.jpg',
+    'https://res.cloudinary.com/demo/image/upload/v1652366604/docs/demo_image5.jpg',
+    'https://res.cloudinary.com/demo/image/upload/v1652345874/docs/demo_image1.jpg',
+    'https://res.cloudinary.com/demo/image/upload/v1652345767/docs/demo_image3.jpg',
+  ];
+
+  return (
+    <div className="overflow-hidden w-full" ref={emblaRef}>
+      <div className="flex mb-16">
+        {images.map((url, index) => (
+          <div key={index} className="flex-none max-w-full px-2 pl-3">
+            <Image
+              src={url}
+              alt={`Slide ${index + 1}`}
+              width={800}
+              height={800}
+              className="w-[200] h-[200] md:w-[300] md:h-[300] lg:w-[400] lg:h-[400] object-cover rounded-lg md:rounded-xl lg:rounded-2xl shadow-lg"
+              priority
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+Now, you can see the gallery that shows multiple images that can be scrolled horizontally.
+![Example Image](https://github.com/user-attachments/assets/fcccf03d-e15d-4eeb-95dc-eafb3a658fac)
+
+## Install Plugins
+
+As I mentioned above, Embla Carousel provides various plugins to enhance the carousel's functionality.
+You can install the plugins by running the following command in your Terminal.
+
+```bash
+npm install embla-carousel-auto-scroll --save
+```
+
+Then, import the plugin in your React component and apply it to the carousel.
+
+```typescript
+// import
+import AutoScroll from 'embla-carousel-auto-scroll';
+
+// ... code
+const [emblaRef] = useEmblaCarousel({ loop: true, align: 'start' }, [
+  AutoScroll({
+    speed: 1, // 1 second
+    startDelay: 0, // delay option
+    direction: 'forward', // direction option
+    stopOnInteraction: false, // stop on interaction option
+  }),
+]);
+```
+
+As a result, you have implmented the fancy carousel
+with auto-scrolling feature by typing just few lines.
+
+## What else can you do?
+
+Embla Carousel provides more plugins like below
+
+- Autoplay
+- Auto Scroll
+- Auto Height
+- Class Names
+- Fade
+- Wheel Gestures
+
+You can find more details in the official documentation of Embla Carousel.
+[Visit Embla Carousel](https://www.embla-carousel.com/plugins/)
+
+---

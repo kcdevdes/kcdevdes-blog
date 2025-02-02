@@ -18,31 +18,34 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
   return (
     <>
       <Head>
-        <meta property="og:title" content="Maintain Hoon Blog Main" />
+        <meta property="og:title" content="kcdevdes.log" />
         <meta property="og:type" content="website" />
-        <meta property="og:description" content="학습과 경험을 기록하고 있습니다." />
-        <meta property="og:url" content="https://maintainhoon.vercel.app" />
-        <meta property="og:image" content="https://maintainhoon.vercel.app/images/metaLogo.png" />
+        <meta property="og:description" content="See my tech blog" />
+        <meta property="og:url" content="https://kcdevdes.com" />
+        <meta property="og:image" content="https://kcdevdes.com/images/meta-logo.png" />
       </Head>
       <section className="my-10">
-        <h1 className="font-bold text-2xl sm:text-4xl font-mono">🧑🏻‍💻 Maintain Hoon</h1>
+        <h1 className="font-light text-2xl sm:text-4xl">Gibeom Choi.</h1>
+        <sup className="font-normal text-xl">최기범.</sup>
       </section>
-      <section className="flex justify-center gap-8 items-center flex-wrap">
+      <section className="flex justify-between gap-8 items-center flex-wrap ">
         <Image
-          src="/images/profile.jpeg"
+          src="/images/profile.png"
           alt="profile"
           width={300}
           height={300}
-          className="rounded-2xl"
+          className="rounded-[60px] drop-shadow-xl"
         />
         <div className="min-w-[250] max-w-[300px]">
-          <h2 className="font-bold text-xl">도전하는 개발자 유지훈 입니다.</h2>
+          <h2 className="font-light text-4xl">Annyeong-haseyo</h2>
+          <sup className="font-normal text-xl">Hello</sup>
           <br />
-          <p>건강한 성장곡선을 위해서 노력합니다.</p>
-          <p>정리를 하는 습관을 들이려고 노력합니다.</p>
+          <p>Full-stack developer, Computer Science, BS, University of Massachusetts - Boston</p>
+          <br />
+          <p>Graduation Expected on Dec, 2025</p>
           <div className="flex gap-5 items-center mt-4">
             <a
-              href="mailto:gch05406@gmail.com"
+              href="mailto:kcdevdes@gmail.com"
               className="flex gap-2 items-center hover:scale-110 transition-transform duration-500 hover:text-green-500 hover:fill-green-500 dark:fill-white dark:hover:fill-green-500"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -51,7 +54,7 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
               <p>Mail</p>
             </a>
             <a
-              href="https://github.com/yooji0415"
+              href="https://github.com/kcdevdes"
               className="flex gap-2 items-center transition-transform duration-500 hover:scale-110 hover:text-green-500 hover:fill-green-500 dark:fill-white dark:hover:fill-green-500"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -59,11 +62,27 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
               </svg>
               <p>GitHub</p>
             </a>
+            <a
+              href="https://instagram.com/g_choi001"
+              className="flex gap-2 items-center transition-transform duration-500 hover:scale-110 hover:text-green-500 hover:fill-green-500 dark:fill-white dark:hover:fill-green-500"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M7.75 2h8.5A5.25 5.25 0 0 1 21.5 7.25v8.5A5.25 5.25 0 0 1 16.25 21H7.75A5.25 5.25 0 0 1 2.5 15.75v-8.5A5.25 5.25 0 0 1 7.75 2ZM12 6.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm5.5-9.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+              </svg>
+
+              <p>Instagram</p>
+            </a>
           </div>
         </div>
       </section>
       <section className="mt-12 mb-10">
-        <h1 className="font-bold text-2xl sm:text-4xl font-mono">📝 Recent Posts</h1>
+        <h1 className="text-2xl sm:text-4xl font-bold">📖 Posts</h1>
       </section>
       <PostList posts={posts} />
     </>

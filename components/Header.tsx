@@ -44,7 +44,57 @@ export default function Header() {
   return (
     <>
       <Head>
-        <title>Maintain Hoon</title>
+        <title>kcdevdes.log</title>
+
+        {/* D2Coding Font */}
+        <link
+          href="http://cdn.jsdelivr.net/gh/joungkyun/font-d2coding/d2coding.css"
+          rel="stylesheet"
+          type="text/css"
+        />
+        <style global jsx>{`
+          @font-face {
+            font-family: 'D2 coding';
+            font-style: normal;
+            font-weight: 400;
+            src: url('D2Coding.eot');
+            src: local('※'), local('D2Coding'),
+              url('D2Coding.eot?#iefix') format('embedded-opentype'),
+              url('D2Coding.woff2') format('x-woff2'), url('D2Coding.woff') format('woff'),
+              url('D2Coding.ttf') format('truetype'), url('D2Coding.svg') format('svg');
+          }
+          @font-face {
+            font-family: 'D2 coding';
+            font-style: normal;
+            font-weight: 700;
+            src: url('D2CodingBold.eot');
+            src: local('※'), local('D2Coding Bold'),
+              url('D2CodingBold.eot?#iefix') format('embedded-opentype'),
+              url('D2CodingBold.woff2') format('x-woff2'), url('D2CodingBold.woff') format('woff'),
+              url('D2CodingBold.ttf') format('truetype'), url('D2CodingBold.svg') format('svg');
+          }
+          @font-face {
+            font-family: 'Paperlogy';
+            src: url('/font/Paperlogy-4Regular.ttf') format('ttf');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+          }
+          @font-face {
+            font-family: 'Paperlogy';
+            src: url('/font/Paperlogy-1Thin.ttf') format('ttf');
+            font-weight: light;
+            font-style: normal;
+            font-display: swap;
+          }
+          @font-face {
+            font-family: 'Paperlogy';
+            src: url('/font/Paperlogy-7Bold.ttf') format('ttf');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+          }
+        `}</style>
       </Head>
       <header
         ref={headerRef}
@@ -53,9 +103,11 @@ export default function Header() {
         <div className="text-black max-w-screen-md h-20 flex flex-nowrap items-center justify-between m-auto px-8">
           <Link href="/">
             {theme === 'dark' ? (
-              <Image src="/images/logoDarkMode.png" alt="profile" width={180} height={30} />
+              // <Image src="/images/logoDarkMode.png" alt="profile" width={180} height={30} />
+              <h1 className="text-blue-300 text-3xl font-light">@kcdevdes</h1>
             ) : (
-              <Image src="/images/logoLightMode.png" alt="profile" width={180} height={30} />
+              // <Image src="/images/logoLightMode.png" alt="profile" width={180} height={30} />
+              <h1 className="text-blue-700 text-3xl font-light">@kcdevdes</h1>
             )}
           </Link>
           <div className="flex flex-nowrap gap-8 items-center">

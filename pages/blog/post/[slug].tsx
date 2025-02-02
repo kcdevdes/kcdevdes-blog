@@ -17,14 +17,14 @@ const Post = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
         <meta property="og:title" content={post.title} />
         <meta property="og:type" content="article" />
         <meta property="og:description" content={post.description} />
-        <meta property="og:url" content="https://maintainhoon.vercel.app" />
-        <meta property="og:image" content="https://maintainhoon.vercel.app/images/metaLogo.png" />
+        <meta property="og:url" content="https://kcdevdes.com" />
+        <meta property="og:image" content="https://kcdevdes.com/images/meta-logo.png" />
       </Head>
       <div className="mt-10 pb-10 border-b-2 mb-10 prose dark:prose-invert">
         <h1 className="mb-16">{post.title}</h1>
         <MDXComponent />
       </div>
-      <Utterances />
+      {/* <Utterances /> */}
     </>
   );
 };
