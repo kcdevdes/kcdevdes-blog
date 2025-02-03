@@ -16,6 +16,7 @@ yarn start
 
 ## 📂 Folder Structure
 
+```plain
 markdown
 Copy
 Edit
@@ -58,3 +59,4 @@ blog
 ├─ tailwind.config.js
 ├─ tsconfig.json
 └─ yarn.lock
+```
