@@ -23,9 +23,9 @@ export default function Category({ posts }: InferGetStaticPropsType<typeof getSt
       <Head>
         <meta property="og:title" content="kcdevdes.log" />
         <meta property="og:type" content="website" />
-        <meta property="og:description" content="See my tech blog" />
-        <meta property="og:url" content="https://kcdevdes.com" />
-        <meta property="og:image" content="https://kcdevdes.com/images/meta-logo.png" />
+        <meta property="og:description" content="Category" />
+        <meta property="og:url" content="https://kcdevdes.com/category" />
+        <meta property="og:image" content="https://kcdevdes.com/images/meta-logo.jpeg" />
       </Head>
       <section className="mt-12 mb-8 flex flex-col gap-12">
         <h1 className="font-bold text-2xl sm:text-4xl font-mono">🗂 Category</h1>

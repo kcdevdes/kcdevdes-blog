@@ -24,11 +24,11 @@ export default function Blog({ posts }: InferGetStaticPropsType<typeof getStatic
   return (
     <>
       <Head>
-        <meta property="og:title" content="Maintain Hoon Blog Page" />
+        <meta property="og:title" content="kcdevdes.log" />
         <meta property="og:type" content="website" />
-        <meta property="og:description" content="Maintain Hoon의 블로그 페이지 입니다." />
-        <meta property="og:url" content="https://maintainhoon.vercel.app" />
-        <meta property="og:image" content="https://maintainhoon.vercel.app/images/metaLogo.png" />
+        <meta property="og:description" content="Posts" />
+        <meta property="og:url" content="https://kcdevdes.com/blog" />
+        <meta property="og:image" content="https://kcdevdes.com/images/meta-logo.jpeg" />
       </Head>
       <section className="mt-12 mb-8 flex flex-col gap-12">
         <h1 className="font-bold text-2xl sm:text-4xl font-mono">📝 Blog</h1>

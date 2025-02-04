@@ -20,9 +20,9 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
       <Head>
         <meta property="og:title" content="kcdevdes.log" />
         <meta property="og:type" content="website" />
-        <meta property="og:description" content="See my tech blog" />
+        <meta property="og:description" content="Gibeom Choi" />
         <meta property="og:url" content="https://kcdevdes.com" />
-        <meta property="og:image" content="https://kcdevdes.com/images/meta-logo.png" />
+        <meta property="og:image" content="https://kcdevdes.com/images/meta-logo.jpeg" />
       </Head>
       <section className="my-10">
         <h1 className="font-light text-2xl sm:text-4xl">Gibeom Choi.</h1>

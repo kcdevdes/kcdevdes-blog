@@ -1,6 +1,6 @@
 /** @type {import ('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://maintainhoon.vercel.app/',
+  siteUrl: 'https://kcdevdes.com/',
   generateRobotsTxt: true,
   sitemapSize: 7000,
 };
