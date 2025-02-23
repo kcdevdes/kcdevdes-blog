@@ -1,0 +1,115 @@
+---
+title: KOSA Web Development Journey
+date: Feb 22, 2025
+description: A journey through the development of the KOSA website.
+category: react
+tags: [english]
+---
+
+## Introduction
+
+At UMass Boston (University of Massachusetts Boston), there is a Korean Student Association called KOSA. During a personal conversation with the student association president, we discussed the idea of having an official website for KOSA. This inspired me to take on the challenge of building it.
+
+A website where members could interact, share stories, and preserve memories could foster a sense of community and ultimately be beneficial to the student association. Since this was my first time developing an interactive website that everyone could use, my code wasn’t perfectly structured. However, I focused on developing an MVP (Minimum Viable Product), prioritizing the implementation of essential features such as user registration, login, event management, and forum functionality.
+
+Note: My primary expertise is in backend development, so there may be technical inaccuracies in my description. I appreciate your understanding.
+
+Website: [https://umbkosa.org](https://umbkosa.org)
+
+---
+
+## KOSA Website Tech Stack
+
+1. **Next.js**: I chose Next.js because it supports /app Page Routing, allowing for faster development. Additionally, it provides benefits such as SSR (Server-Side Rendering) and a structured directory by default, making it an ideal choice for a React-based project.
+2. **TypeScript**: Although JavaScript would have been sufficient, I opted for TypeScript because it enables more precise type definitions when working with Firebase Store, reducing debugging efforts.
+3. **TailwindCSS**: I prefer TailwindCSS because it is intuitive and close to raw CSS while offering a simple learning curve. Unlike other libraries, it requires minimal setup and provides a utility-first approach for styling.
+4. **Vercel Deployment Service**: Vercel, the company behind Next.js, offers seamless deployment with extensive support for Next.js applications. While it can be expensive at high traffic volumes, it significantly simplifies deployment.
+5. **Cloudflare**: I chose Cloudflare for domain management. AWS Route 53 requires CNAME records to start with "www," which was a limitation in my case. To avoid unnecessary configuration issues, I opted for Cloudflare from the beginning.
+6. **GitHub**: GitHub serves as the hosting service for version control (VCS). Since Vercel automatically hooks into GitHub repositories for deployment, this integration streamlined the process.
+7. **Firebase**: Firebase, a cloud-based service by Google, was instrumental in saving development time. I used Firebase Authentication for passwordless login, which eliminated the need to manage passwords manually. Additionally, restricting sign-ups to email addresses ending in @umb.edu added an extra layer of security. Firestore, Firebase's NoSQL database, provided a highly scalable solution for storing and retrieving data efficiently.
+8. **ChatGPT**: I used ChatGPT primarily to automate repetitive code tasks and assist in UI/UX design decisions.
+
+---
+
+## Development Environment
+
+- MacBook Pro 16" M1 Pro 16GB
+- VSCode + Copilot
+- GitHub Desktop
+
+---
+
+## Initial Setup
+
+![Project Structure](https://github.com/user-attachments/assets/5161d74f-d419-41e2-afc8-300a73e1f001)
+
+- **/app** - Stores page components
+  - **/api** - Contains serverless API routes (Next.js feature)
+- **/components** - Stores reusable UI components
+- **/lib** - Manages core application logic
+  - **/entity** - Defines data models for Firebase
+  - **/firebase** - Handles Firebase configuration
+  - **/hook** - Stores custom React hooks
+  - **/store** - Manages Zustand-based global state
+- **/public** - Stores static assets
+  - **/images** - Stores images
+  - **/locales** - Stores JSON files for multilingual support (English, Korean)
+
+This structure will be refined further as the project evolves.
+
+---
+
+## Challenges During Development
+
+### Firebase Limits Authentication to 100 Requests Per Day
+
+Firebase’s Spark (free) plan imposes a limit of 100 authentication requests per day. Additionally, sending multiple login requests with the same email (approximately eight times) triggers a temporary lockout. Initially, I attempted to test authentication directly on Firebase, but each time I hit the limit, I had to wait 4–5 hours. To overcome this, I switched to using Firebase Emulator, which allowed unrestricted testing. Although it required writing separate test code, it was a crucial solution that significantly improved the development process.
+
+### Vercel Blocks Deployment Due to ESLint Warnings
+
+ESLint plays a crucial role in maintaining code consistency, especially in JavaScript and TypeScript projects where multiple coding styles exist. However, I encountered an issue where Vercel rejected deployments due to ESLint warnings, even though they were non-critical. Since this was likely an enforcement for better stability, I adjusted my workflow by ensuring that `npm run build` was executed before merging changes into the main branch.
+
+### Firestore Does Not Allow Predefined Document IDs
+
+In relational databases like PostgreSQL, it is common practice to generate IDs upon insertion (e.g., `id: 1`). However, in Firestore, document IDs are automatically generated at the time of creation, making it impossible to reference an ID before inserting data. To work around this, I generated the document reference first, retrieved its ID, and then stored the document using `setDoc()`.
+
+```typescript
+// Generate document reference before setting data
+const forumRef = collection(db, 'forums');
+const newForumRef = doc(forumRef); // Pre-generate document ID
+
+const newPost: Forum = {
+  id: newForumRef.id, // Assign Firestore-generated ID
+  title,
+  content,
+  category,
+  language,
+  thumbnails,
+  author: userEmail,
+  createdAt: Timestamp.now(),
+  updatedAt: Timestamp.now(),
+  view: 0,
+  comments: `forums/${newForumRef.id}/comments`,
+};
+
+// Use setDoc() to save data while keeping the generated ID
+await setDoc(newForumRef, newPost);
+```
+
+This method ensures that the document ID is generated and assigned before inserting data.
+
+### Passwordless Login Works, But Only on the Same Device
+
+The authentication process involves entering an email, receiving a login link, and signing in by clicking the link. However, Firebase restricts authentication to the same device that initiated the request. This limitation led me to explore alternative authentication methods. As a result, I decided to build a custom authentication server using Spring Boot to manage JWT-based authentication while maintaining the passwordless login approach.
+
+## Deployment Technologies
+
+- Vercel Analytics: Vercel provides basic real-time analytics, including visitor counts, bounce rates, and session duration. However, its free tier has significant limitations. To gain more insights, I plan to transition to Google Analytics in the future.
+- GitHub Branch Protection: The main branch is directly linked to Vercel for automatic deployment. To maintain stability, direct commits to the main branch are restricted. Instead, all changes go through a pull request (PR) and review process before merging.
+
+## Results and Future Plans
+
+This project gained more attention than expected. Initially, I assumed frontend development was not my strength, but I found it engaging and realized how backend decisions significantly impact the user experience.
+I applied several concepts I had previously learned but never used in practice. For example, implementing GitHub’s main branch protection feature provided firsthand experience in enforcing code stability.
+Moving forward, I plan to develop the backend using Spring Boot and Java. This will not only replace Firebase Authentication but also add more management capabilities and reduce dependency on Firebase.
+The authentication system will be built using Spring Boot with JWT-based authentication, maintaining the existing email login approach while allowing authentication from any device.
