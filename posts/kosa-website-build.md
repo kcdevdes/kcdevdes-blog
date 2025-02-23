@@ -11,7 +11,7 @@ UMass Boston(메사추세츠 대학교 - 보스턴 캠퍼스)에서는 KOSA라�
 
 > 주의할 점은 나의 주 스택은 벡엔드라 서술이 이상하거나 기술적으로 맞지 않는 부분이 있을 수 있다. 양해 바란다.
 
-> https://umbkosa.org 완성된 웹사이트
+> [UMB KOSA](https://umbkosa.org) 완성된 웹사이트
 
 ## KOSA 웹사이트 Tech Stack
 
@@ -60,7 +60,7 @@ ESLint는 코드의 가독성과 일관성을 지켜주는 아주 중요한 존�
 
 ### FireStore의 아이디를 먼저 뽑는 방법이 없을까?
 
-PostgreSQL같은 데이터 베이스는 저장할 때, id에 자신의 id를 담는 경우가 흔하다. `id: 1` 과 같이 자신의 id를 담게 할려고 FIreStore에 ID를 담을려고 했지만 Firebase의 Document는 데이터 생성 시에 id가 생성된다. 즉, 데이터를 생성할 떄 까지만 내 데이터의 id를 추가할 수 없다는 의미가 된다. 다음과 같은 코드로 해결했다.
+PostgreSQL같은 데이터 베이스는 저장할 때, id에 자신의 id를 담는 경우가 흔하다. `id: 1` 과 같이 자신의 id를 담게 할려고 FIreStore에 ID를 담을려고 했지만 Firebase의 Document는 데이터 생성 시에 id가 생성된다. 즉, 데이터를 생성하고 그걸 저장하기 까지 난 ID를 알 수 없다. 그래서 document에 직접 id를 담을 수 없다는 문제가 발생한다.
 
 ```types
     // 문서 ID를 직접 생성하여 일치하도록 함
@@ -85,7 +85,7 @@ PostgreSQL같은 데이터 베이스는 저장할 때, id에 자신의 id를 담
     await setDoc(newForumRef, newPost);
 ```
 
-즉, 미리 Document 생성 - Document ID에 ID 삽입 - setDoc을 통해 업데이트 라는 과정이로 이 문제를 해결하였다.
+이 문제는 `미리 Document 생성 - Document ID에 ID 삽입 - setDoc을 통해 업데이트` 라는 과정이로 이 문제를 해결하였다.
 
 ### Passwordless Login이 좋긴 한데...다른 기기에서도 로그인하고 싶어
 
