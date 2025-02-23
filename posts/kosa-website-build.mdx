@@ -1,0 +1,106 @@
+---
+title: KOSA 웹 제작기
+date: Feb, 22, 2025
+description: KOSA 웹사이트를 제작한 이야기를 담고 있어요
+category: react
+tags: [korean]
+---
+
+# KOSA 웹 제작기
+
+UMass Boston(메사추세츠 대학교 - 보스턴 캠퍼스)에서는 KOSA라고 하는 한인 학생회가 있다. 한인 학생회장과 개인 대화를 나누던 중, KOSA의 웹사이트가 있으면 좋겠다는 이야기를 듣고 영감을 받아 제작에 착수하였다. 많은 사람들이 직접 사이트에서 이런 저런 이야기를 나누며 서로의 추억을 공유 가능한 사이트가 있으면 친밀감을 키울 수 있고, 결국 한인회에 많은 도움이 될 것이기 때문이다. 모두가 이용 가능한 상호작용이 많이 들어가있는 웹사이트 개발은 처음이라 많은 부분에서 코드가 잘 정리되진 않았지만, MVP(Minimum Valuable Product)의 개발을 하는 것을 주축으로 삼아 나의 개발 기록을 적어볼려고 한다.
+최소한의 기능으로 회원 가입, 로그인, 이벤트 등록, 포럼 기능을 구현하는 것을 목표로 삼았다.
+
+> 주의할 점은 나의 주 스택은 벡엔드라 서술이 이상하거나 기술적으로 맞지 않는 부분이 있을 수 있다. 양해 바란다.
+
+> https://umbkosa.org 완성된 웹사이트
+
+## KOSA 웹사이트 Tech Stack
+
+1. Next.js: 빠른 개발을 위해 /app Page Routing이 지원되는 Next.js를 사용하기로 하였다. SSR등의 이점 또한 누리기 위해 선택했다. React기반에 기본적인 디렉터리 구조를 제공해준다는 점 또한 선택에 큰 이점을 주었다.
+2. TypeScript: 원래는 JavaScript로 해도 괜찮았지만, Firebase Store에 접근하는 과정에서 아무래도 타입을 정밀히 정하고 조작해야지만 디버깅에 대한 수고가 많이 덜어질 것이라고 예상하였다.
+3. TailwindCSS: 가장 CSS에 가까우면서 사용하기 편한 CSS 라이브러리라고 생각한다. 다른 라이브러리와 다르게 학습없어 몇개의 키워드와 네이밍 컨벤션만 익히면 바로 사용할 수 있을 정도로 간편하다.
+4. Vercel Deployment Service: Vercel은 Next.js를 제작한 회사다. 당연히 배포 또한 잘 지원하고 많은 편의 기능을 제공한다. 물론 자금이 나갈 때는 비싸지지만, 그렇게 트래픽이 모이는 상황이면 오히려(?) 기쁠 거 같고, 배포의 수고스러움이 많이 줄어든다는 점에서 선택했다.
+5. Cloudflare: 도메인은 클라우드플레어에서 구매 및 관리하였다. Route 53은 CNAME이 무조건 www.으로 시작해야하는 한계가 존재하였고, 이를 고치기 위해 클라우드 플레어로 옮긴 전적이 있어 이번엔 처음부터 클라우드 플레어에서 관리하기로 하였다.
+6. GitHub: 깃허브를 VCS(Version Control System)의 호스팅 서비스로 선택하였다. Github에 배포한 코드는 Vercel이 자동으로 Hook을 하여 배포까지 완료해주기 때문에 이점이 크게 늘어난다.
+7. Firebase: Firebase는 구글에서 제공하는 데이터 매니지먼트 서비스이다. 벡엔드가 없는 개발에서 많은 시간을 아끼게 해준 1등 공신이다. 이중에서 나는 Auth와 Store를 사용하였다. Auth는 Passwordless Login을 지원한다는 점이 가장 크게 와닿았다. 비밀번호를 굳이 관리할 필요가 없는 시점에서 관리에 대한 부담이 굉장히 줄어들고, @umb.edu 도메인으로 끝나는 메일만 가입이 가능하기에 다른 추가적인 보안 조치가 필요없다고 판단하여 사용하였다. 또한 FireStore는 굉장한 확장성을 지닌 NoSQL 데이터베이스로 몇가지의 간단한 코드만으로 데이터 작성 및 수정이 가능하기에 사용해보았다.
+8. ChatGPT: 대부분의 코드 반복, 모르는 코드의 디자인 적 요소를 도와주는 훌륭한 친구다. GPT Plus 결재로 정말 잘 사용하고 있다고 생각한다.
+
+## 개발 환경
+
+- MacBook Pro 16" M1 Pro 16GB
+- VSCode + Copilot
+- GitHub Desktop
+
+## 초기 설정
+
+![](https://github.com/user-attachments/assets/5161d74f-d419-41e2-afc8-300a73e1f001)
+
+- /app - Page를 저장
+  - /api - 서버리스 API를 등록 (Next.js 기능)
+- /components - Page에 사용되는 요소 (Component)를 저장하는 폴더
+- /lib - 관리형 폴더
+  - /entity - firebase에 저장되는 데이터를 구성하는 엔티티 저장
+  - /firebase - firebase 연결을 담당
+  - /hook - 훅을 저장
+  - /store - Zustand 기반 스토어 저장
+- /public - public으로 접근 가능한 리소스 저장
+  - /images - 이미지들
+  - /locales - 영어, 한국어 번역한 JSON 파일 저장
+
+다음과 같이 구성하였고, 이 구성은 차후 조금 더 다듬을 예정이다.
+
+## 개발 중 마주한 문제점
+
+### Firebase는 하루에 100회만 인증을 허가해줘!
+
+파이어베이스는 Spark(무료) 요금제에 대해서 하루 100회의 가입 제한을 둔다. 하지만 같은 이메일로 대략 8회 정도 로그인 요청을 보내면 접근을 제한한다. 처음엔 실제 Firebase에 연결 테스트를 하였지만 한 번 제한이 걸릴 때 마다 4-5시간 동안 아무것도 못하니 방법을 찾아보았고, Firebase Emulator를 사용하면 제한없이 테스트가 가능했다. 테스트용 코드를 따로 작성해줘야하는 문제가 있었지만, 개발하는 데 있어 가장 크게 기억나는 문제해결이었다.
+
+### Vercel은 build시 ESLint에 Warning 조차 허가해주지 않아!
+
+ESLint는 코드의 가독성과 일관성을 지켜주는 아주 중요한 존재이다. 특히 JS, TS같이 다양한 방법론이 존재하는 언어에서의 협업을 위해 필수로 사용되고는 한다. 하지만 `npm run build`를 할 때마다 warning이 나오는 걸 무시하고 배포하니 vercel에서 배포를 거부하는 문제를 발견했다. 아마 안정성을 위한 최소한의 조치라고 생각한다. 그래서 main브랜치 merge 이전엔 항상 npm run build를 통해 배포 이전에 warning이 없는 지 검사하는 과정을 추가하였다.
+
+### FireStore의 아이디를 먼저 뽑는 방법이 없을까?
+
+PostgreSQL같은 데이터 베이스는 저장할 때, id에 자신의 id를 담는 경우가 흔하다. `id: 1` 과 같이 자신의 id를 담게 할려고 FIreStore에 ID를 담을려고 했지만 Firebase의 Document는 데이터 생성 시에 id가 생성된다. 즉, 데이터를 생성할 떄 까지만 내 데이터의 id를 추가할 수 없다는 의미가 된다. 다음과 같은 코드로 해결했다.
+
+```types
+    // 문서 ID를 직접 생성하여 일치하도록 함
+    const forumRef = collection(db, 'forums');
+    const newForumRef = doc(forumRef); // 미리 생성된 문서 ID 사용
+
+    const newPost: Forum = {
+      id: newForumRef.id, // 여기에 Firestore의 문서 ID를 직접 설정
+      title,
+      content,
+      category,
+      language,
+      thumbnails,
+      author: userEmail,
+      createdAt: Timestamp.now(),
+      updatedAt: Timestamp.now(),
+      view: 0,
+      comments: `forums/${newForumRef.id}/comments`,
+    };
+
+    // setDoc()을 사용하여 문서를 생성하면서 ID를 유지
+    await setDoc(newForumRef, newPost);
+```
+
+즉, 미리 Document 생성 - Document ID에 ID 삽입 - setDoc을 통해 업데이트 라는 과정이로 이 문제를 해결하였다.
+
+### Passwordless Login이 좋긴 한데...다른 기기에서도 로그인하고 싶어
+
+로그인을 하는 방법이 굉장히 제한적이다. 로그인을 위해 email 입력 -> 이메일로 전송된 링크 클릭 -> 이미 있는 email이면 로그인, 아니면 가입 -> 완료 라는 경로를 택하였는데, Firebase의 정책으로 인해 오로지 같은 기기에서만 로그인이 가능하단 문제가 있다. 이걸 해결하기 위해 새로이 인증 서버를 구축하기로 마음 먹은 계기가 되었다.
+
+## 배포를 위한 기술
+
+1. Vercel-Analytics는 Vercel 배포 페이지에서 실시간 접속자, 바운스률, 접속 통계를 간략히 보여주는 기술을 담고 있다. 이를 사이트 내부에 담아서 Google Analytics를 대체해 사용해보았다. 하지만 보이는 부분이 무료 티어에서는 한계가 명확해 점진적으로 GA로 옮기기로 생각하게 되었다.
+2. GitHub main브랜치는 Vercel 배포와 연결된 브랜치이기에 무차별적 커밋을 허용할 수 없다. 그렇기 때문에 항상 새로운 브랜치를 만들고, PR및 merge하게 만들었다. Github에 제한을 가면 main에 직접적인 커밋을 불허할 수 있는 기능을 사용했다.
+
+## 결과 및 성장, 앞으로
+
+1. 상당히 많은 시선을 얻게 되었다. Frontend는 나랑은 아예 안 맞는 분야라고 막연히 생각했는데, 의외로 재있는 걸 넘어 벡엔드가 어느 부분에서 많은 도움이 될 것인지에 대한 감각을 익혔다.
+2. 그동안 배우기만 하고 사용해보지 못한 부분을 직접 프로젝트에 적용해보았다. 예로, Github의 main commit 금지 기능을 과거 보기만 하고 사용해본 경험은 없었는데, 이번에 사용해보면서 상당히 안정성이 증가할 것이란 게 체감되는 부분이었다.
+3. Spring Boot + Java를 통한 벡엔드 부분을 제작할 예정이다. Auth 부분에서 넘어서 실제로 프로젝트의 의미를 더하고 관리의 편리성과 Firebase 의존성을 줄이기 위해 AWS + Docker + Spring boot로 관리를 할 예정이다.
+4. Firebase 의존성을 줄이기 위해, Spring Boot로 Auth 시스템을 구축하고, JWT 기반 인증을 구현하고, 기존 이메일 로그인 방식을 유지할 계획을 확립하였다.

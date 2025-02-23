@@ -40,7 +40,7 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
           <h2 className="font-light text-4xl">Annyeong-haseyo</h2>
           <sup className="font-normal text-xl">Hello</sup>
           <br />
-          <p>Full-stack developer, Computer Science, BS, University of Massachusetts - Boston</p>
+          <p>Backend developer, Computer Science, BS, University of Massachusetts - Boston</p>
           <br />
           <p>Graduation Expected on Dec, 2025</p>
           <div className="flex gap-5 items-center mt-4">
