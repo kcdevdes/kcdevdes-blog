@@ -131,14 +131,14 @@ jobs:
    jobs:
      build-and-push:
        runs-on: ubuntu-latest
-   
+
        steps:
          - name: Checkout repository
            uses: actions/checkout@v4
-   
+
          - name: Login to Docker Hub
            run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-   
+
          - name: Build and push Docker image
            run: |
              docker build -t kcdevdes/umb-kosa-api:latest .
@@ -149,4 +149,4 @@ jobs:
 
 6. Navigate to the **Actions** tab in your GitHub repository to monitor the deployment progress.
 
-<Write more later>
+To be continued...
