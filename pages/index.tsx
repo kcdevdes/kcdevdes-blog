@@ -25,8 +25,8 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
         <meta property="og:image" content="https://kcdevdes.com/images/meta-logo.jpeg" />
       </Head>
       <section className="my-10">
-        <h1 className="font-light text-2xl sm:text-4xl">Gibeom Choi.</h1>
-        <sup className="font-normal text-xl">최기범.</sup>
+        <h1 className="font-light text-2xl sm:text-4xl">Gibeom Choi</h1>
+        <sup className="font-normal text-xl">최기범</sup>
       </section>
       <section className="flex justify-between gap-8 items-center flex-wrap ">
         <Image
@@ -40,7 +40,7 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
           <h2 className="font-light text-4xl">Annyeong-haseyo</h2>
           <sup className="font-normal text-xl">Hello</sup>
           <br />
-          <p>Backend developer, Computer Science, BS, University of Massachusetts - Boston</p>
+          <p>Frontend developer, Computer Science, BS, University of Massachusetts - Boston</p>
           <br />
           <p>Graduation Expected on Dec, 2025</p>
           <div className="flex gap-5 items-center mt-4">

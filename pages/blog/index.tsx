@@ -51,7 +51,7 @@ export default function Blog({ posts }: InferGetStaticPropsType<typeof getStatic
             type="text"
             className="flex-1 outline-none bg-transparent appearance-none"
             onChange={handleSearch}
-            placeholder="검색하기"
+            placeholder="Search"
           />
         </div>
       </section>
